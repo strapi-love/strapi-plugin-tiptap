@@ -132,6 +132,5 @@ dist
 .idea
 
 package-lock.json
-yarn.lock
 
 .npmrc
