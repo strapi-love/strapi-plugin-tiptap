@@ -5,16 +5,6 @@ module.exports = [
     method: 'GET',
     path: '/settings',
     handler: 'settingsController.getSettings',
-    config: {
-      policies: [
-        {
-          name: 'admin::hasPermissions',
-          config: {
-            actions: [`plugin::${pluginId}.settings.manage`],
-          },
-        },
-      ],
-    },
   },
   {
     method: 'PUT',
