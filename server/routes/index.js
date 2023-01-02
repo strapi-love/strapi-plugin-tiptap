@@ -1,18 +1,34 @@
+const pluginId = require("../../admin/src/pluginId");
+
 module.exports = [
   {
     method: 'GET',
-    path: '/',
-    handler: 'settingsController.index',
+    path: '/settings',
+    handler: 'settingsController.getSettings',
     config: {
-      policies: [],
+      policies: [
+        {
+          name: 'admin::hasPermissions',
+          config: {
+            actions: [`plugin::${pluginId}.settings.manage`],
+          },
+        },
+      ],
     },
   },
   {
     method: 'PUT',
-    path: '/update-settings',
+    path: '/settings',
     handler: 'settingsController.updateSettings',
     config: {
-      policies: [],
+      policies: [
+        {
+          name: 'admin::hasPermissions',
+          config: {
+            actions: [`plugin::${pluginId}.settings.manage`],
+          },
+        },
+      ]
     },
   },
 ];

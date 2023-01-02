@@ -34,6 +34,8 @@ import EmbedsTabContent from './Tabs/Embeds.js'
 import OtherTabContent from './Tabs/Other.js'
 import { mergeDeep } from "../../utils/merge";
 
+import pluginId from '../../pluginId.js'
+
 const HomePage = (ctx) => {
   const toggleNotification = useNotification()
   const {lockApp, unlockApp} = useOverlayBlocker()
@@ -46,14 +48,14 @@ const HomePage = (ctx) => {
       await queryClient.invalidateQueries('settings')
       toggleNotification({
         type: 'success',
-        message: {id: 'strapi-tiptap-editor-save-success', defaultMessage: 'Saved'}
+        message: {id: `${pluginId}-save-success`, defaultMessage: 'Saved'}
       })
       unlockApp()
     },
     onError: async () => {
       toggleNotification({
         type: 'warning',
-        message: {id: 'strapi-tiptap-editor-save-error', defaultMessage: 'Saved failed'}
+        message: {id: `${pluginId}-save-success`, defaultMessage: 'Saved failed'}
       })
       unlockApp()
     }
