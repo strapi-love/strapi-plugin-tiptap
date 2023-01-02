@@ -2,22 +2,30 @@
 
 const pluginId = require('../../admin/src/pluginId.js');
 
-const defaultSettings = require('../../utils/defaults.js')
+module.exports = ({ strapi }) => {
+  const settingsService = strapi.plugins[pluginId].services.settings;
 
-
-module.exports = {
-  async getSettings(ctx) {
-    const savedSettings = await strapi.store({type: 'plugin', name: pluginId, key: 'settings'}).get()
-    if (savedSettings !== null) {
-      ctx.send(savedSettings)
-    } else {
-      ctx.send(defaultSettings)
+  const getSettings = async (ctx) => {
+    try {
+      const settings = await settingsService.getSettings();
+      ctx.send(settings)
+    } catch (err) {
+      ctx.throw(500, err);
     }
-  },
-  async updateSettings(ctx) {
-    const newSettings = ctx.request.body
-    await strapi.store({type: 'plugin', name: pluginId, key: 'settings'}).set({value: newSettings})
-    ctx.send({res: 'ok'})
-  },
+  };
 
+  const updateSettings = async (ctx) => {
+    try {
+      const newSettings = ctx.request.body
+      await settingsService.setSettings(newSettings);
+      ctx.send({res: 'ok'})
+    } catch (err) {
+      ctx.throw(500, err);
+    }
+  };
+
+  return {
+    getSettings,
+    updateSettings,
+  }
 };
