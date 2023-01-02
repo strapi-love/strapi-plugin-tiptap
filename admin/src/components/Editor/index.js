@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 // TipTap Editor
 import {EditorContent, FloatingMenu, BubbleMenu} from '@tiptap/react'
-import {Toolbar} from "./Toolbar";
+
+// Toolbar
+import {Toolbar} from "../Toolbar";
 
 // Media library
 import MediaLib from "../MediaLib";
