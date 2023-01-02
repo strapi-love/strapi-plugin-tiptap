@@ -8,6 +8,7 @@ A drop-in replacement for the strapi editor.
 
 ![Screenshot of the editor](./screenshot.png?raw=true "Screenshot")
 
+
 ## What is this?
 It's a dead simple, and easy to use drop-in replacement for the built-in strapi WYSIWYG editor. It's build upon the [TipTap editor](https://tiptap.dev/).
 It saves as plain HTML, making it easy to use with various frontends.
