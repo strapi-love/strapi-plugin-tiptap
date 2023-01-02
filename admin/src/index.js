@@ -1,13 +1,12 @@
-import pluginPkg from "../../package.json";
 import Wysiwyg from "./components/Wysiwyg";
 import pluginId from "./pluginId";
 
-const name = pluginPkg.strapi.name;
+import pluginPermissions from './permissions';
 
 const myComponent = async () => {
   const component = await import(
-    /* webpackChunkName: "strapi-tiptip-editor-settings-page" */ './pages/App'
-    );
+    /* webpackChunkName: "tiptip-editor-settings-page" */ './pages/App'
+  );
 
   return component;
 };
@@ -15,15 +14,15 @@ const myComponent = async () => {
 export default {
   register(app) {
     app.createSettingSection(
-      { id: 'strapi-tiptap-editor', intlLabel: { id: 'my-plugin.plugin.name', defaultMessage: 'Strapi TipTap Editor' } }, // Section to create
+      { id: pluginId, intlLabel: { id: `${pluginId}.settings-section.title`, defaultMessage: 'TipTap Editor' } }, // Section to create
       [
         // links
         {
-          intlLabel: { id: 'my-plugin.plugin.name', defaultMessage: 'Settings' },
+          intlLabel: { id: `${pluginId}.settings-section.settings`, defaultMessage: 'Settings' },
           id: 'Settings',
-          to: '/settings/strapi-tiptap-editor',
+          to: `/settings/${pluginId}`,
           Component: myComponent,
-          permissions: [],
+          permissions: pluginPermissions.settings,
         },
       ]
     );
@@ -33,7 +32,7 @@ export default {
     app.registerPlugin({
       id: pluginId,
       isReady: true,
-      name,
+      name: pluginId,
     });
   },
   bootstrap() {},

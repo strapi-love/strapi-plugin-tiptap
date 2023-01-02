@@ -130,7 +130,7 @@ const WysiwygContent = ({ name, onChange, value, intlLabel, labelAction, disable
       BoldExtension,
       StrikeExtension,
       ItalicExtension,
-      GapcursorExtension,
+      // GapcursorExtension,
       ListItemExtension,
       BulletListExtension,
       HeadingExtension,

@@ -1,11 +1,13 @@
 'use strict';
 
-const packageInfo = require('../../package.json');
+const pluginId = require('../../admin/src/pluginId.js');
+
 const defaultSettings = require('../../utils/defaults.js')
 
+
 module.exports = {
-  async index(ctx) {
-    const savedSettings = await strapi.store({type: 'plugin', name: 'strapi-tiptap-editor', key: 'settings'}).get()
+  async getSettings(ctx) {
+    const savedSettings = await strapi.store({type: 'plugin', name: pluginId, key: 'settings'}).get()
     if (savedSettings !== null) {
       ctx.send(savedSettings)
     } else {
@@ -14,7 +16,7 @@ module.exports = {
   },
   async updateSettings(ctx) {
     const newSettings = ctx.request.body
-    await strapi.store({type: 'plugin', name: 'strapi-tiptap-editor', key: 'settings'}).set({value: newSettings})
+    await strapi.store({type: 'plugin', name: pluginId, key: 'settings'}).set({value: newSettings})
     ctx.send({res: 'ok'})
   },
 
